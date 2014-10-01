@@ -1,2 +1,175 @@
-{    "toJSON": true,    "dbInfo": [{        "name": "Model",        "uuid": ""    }],    "extraProperties": {        "version": "1",        "classes": {        },        "model": {            "scriptMode": "manual"
-        }    },    "dataClasses": []}
+﻿{
+	"toJSON": true,
+	"extraProperties": {
+		"version": "2",
+		"classes": {
+			"Item": {
+				"panelColor": "#7F7F7F",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 32,
+						"Y": 57
+					}
+				}
+			},
+			"TodoList": {
+				"panelColor": "#996699",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 365,
+						"Y": 88
+					}
+				}
+			},
+			"DataClass1": {
+				"panel": {
+					"pathVisible": true,
+					"isOpen": "false"
+				}
+			},
+			"Owner": {
+				"panelColor": "#D8D8D8",
+				"panel": {
+					"isOpen": "true",
+					"position": {
+						"X": 706,
+						"Y": 105
+					},
+					"pathVisible": true
+				}
+			}
+		},
+		"model": {
+			"scriptMode": "manual",
+			"workspaceLeft": 0,
+			"workspaceTop": 52
+		}
+	},
+	"dataClasses": [
+		{
+			"name": "DataClass1",
+			"className": "DataClass1",
+			"collectionName": "DataClass1Collection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"className": "Item",
+			"collectionName": "ItemCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "name",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "done",
+					"kind": "storage",
+					"scope": "public",
+					"type": "bool"
+				},
+				{
+					"name": "todoList",
+					"kind": "relatedEntity",
+					"matchColumn": "todoList",
+					"scope": "public",
+					"type": "TodoList",
+					"path": "TodoList"
+				}
+			]
+		},
+		{
+			"name": "TodoList",
+			"className": "TodoList",
+			"collectionName": "TodoListCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "owner",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Owner",
+					"path": "Owner"
+				},
+				{
+					"name": "name",
+					"scope": "public",
+					"type": "string",
+					"kind": "storage"
+				},
+				{
+					"name": "items",
+					"kind": "relatedEntities",
+					"scope": "public",
+					"type": "ItemCollection",
+					"reversePath": true,
+					"path": "todoList"
+				}
+			]
+		},
+		{
+			"collectionName": "OwnerCollection",
+			"className": "Owner",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"type": "long",
+					"autosequence": "true",
+					"unique": "true",
+					"primKey": "true"
+				},
+				{
+					"name": "name",
+					"scope": "public",
+					"type": "string",
+					"kind": "storage"
+				},
+				{
+					"name": "todoListCollection",
+					"scope": "public",
+					"reversePath": true,
+					"path": "owner",
+					"type": "TodoListCollection",
+					"kind": "relatedEntities"
+				}
+			]
+		}
+	],
+	"type": []
+}
